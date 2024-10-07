@@ -1,0 +1,69 @@
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+  }
+  
+  .signup-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center; /* Center the text */
+  }
+  
+  h2 {
+    margin-bottom: 20px; /* Space between heading and form */
+    color: #20c997; /* Teal color for the heading */
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px; /* Increased padding for a better feel */
+    margin: 10px 0; /* Adjusted margin for more spacing */
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px; /* Increase font size */
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px; /* Increased button padding */
+    background-color: #20c997; /* Teal color */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px; /* Increase font size */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  button:hover {
+    background-color: #17a2b8; /* Darker shade of teal */
+  }
+  
+  .error {
+    color: red;
+    margin: 10px 0; /* Space above error message */
+  }
+  
+  .additional-options {
+    display: flex;
+    justify-content: center; /* Center the links */
+    margin-top: 15px; /* Space between form and links */
+    font-size: 14px; /* Adjust font size */
+  }
+  
+  .link {
+    color: #20c997; /* Teal color for links */
+    text-decoration: none;
+    margin-left: 5px; /* Space between text and link */
+  }
+  
+  .link:hover {
+    text-decoration: underline; /* Underline on hover */
+  }

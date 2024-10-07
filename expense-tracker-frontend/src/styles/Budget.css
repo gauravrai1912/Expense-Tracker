@@ -1,0 +1,108 @@
+.budgets-container {
+  padding: 20px;
+  width: 800px;
+  margin: auto;
+  background-color: #f8f9fa; /* Light background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #20c997; /* Teal color for the heading */
+}
+
+.add-budget-button {
+  display: inline-block;
+  margin: 0 0 20px;
+  padding: 10px 20px;
+  background-color: #20c997; /* Teal background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.add-budget-button:hover {
+  background-color: #17a2b8; /* Darker teal on hover */
+}
+
+/* Budget Table Styling */
+.budgets-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.budgets-table th, .budgets-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: center; /* Centering the text in the cells */
+}
+
+.budgets-table th {
+  background-color: #343a40; /* Dark background for header */
+  color: white;
+}
+
+.budgets-table tr:hover {
+  background-color: #f1f1f1; /* Light background on hover */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-button,
+.delete-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px; /* Space between buttons */
+  text-align: center; /* Center the text in buttons */
+}
+
+.edit-button {
+  background-color: #007bff; /* Blue for edit button */
+}
+
+.edit-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red for delete button */
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Layout for the entire app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the container takes up full height of the viewport */
+}
+
+.content {
+  flex: 1; /* Allow content area to grow and fill the space */
+}
+
+footer {
+  margin-top: auto; /* Push the footer to the bottom */
+}

@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "root123",
+    "database": "expense_tracker_db",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "root123",
+    "database": "expense_tracker_test",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "root123",
+    "database": "expense_tracker_production",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
