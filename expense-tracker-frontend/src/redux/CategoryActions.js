@@ -90,6 +90,8 @@ export const deleteCategory = (id, token) => async (dispatch) => {
 
 export const fetchCategoryIdByName = (categoryName, token) => async (dispatch) => {
   try {
+    console.log(categoryName);
+    console.log(token)
     const response = await axios.get(
       `http://localhost:5000/api/category/getCategoryByName`,
       {

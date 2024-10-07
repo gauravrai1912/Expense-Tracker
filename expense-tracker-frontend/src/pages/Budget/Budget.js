@@ -44,20 +44,27 @@ const Budgets = () => {
             </tr>
           </thead>
           <tbody>
-            {budgets && budgets.map((budget) => (
-              <tr key={budget.id}>
-                <td>{budget.budget_period}</td>
-                <td>{budget.monthly_budget}</td>
-                <td>{budget.category ? budget.category.name : 'N/A'}</td> {/* Safely access category */}
-                <td>
-                  <div className="button-container">
-                    <Link to={`/budget/edit/${budget.id}`} className="edit-button">Edit</Link>
-                    <button className="delete-button" onClick={() => handleDelete(budget.id)}>Delete</button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+  {budgets.length > 0 ? (
+    budgets.map((budget) => (
+      <tr key={budget.id}>
+        <td>{budget.budget_period}</td>
+        <td>{budget.monthly_budget}</td>
+        <td>{budget.category ? budget.category.name : 'N/A'}</td>
+        <td>
+          <div className="button-container">
+            <Link to={`/budget/edit/${budget.id}`} className="edit-button">Edit</Link>
+            <button className="delete-button" onClick={() => handleDelete(budget.id)}>Delete</button>
+          </div>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="4">No budgets available.</td>
+    </tr>
+  )}
+</tbody>
+
         </table>
       </div>
       <Footer />
