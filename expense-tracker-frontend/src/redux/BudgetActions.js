@@ -14,6 +14,7 @@ export const fetchBudgets = (token) => async (dispatch) => {
         Authorization: `${token}`, // Add the token here
       },
     });
+    console.log(response.data);
     dispatch({ 
         type: GET_BUDGETS,
         payload: response.data 
@@ -49,7 +50,7 @@ export const addBudget = (budget, token) => async (dispatch) => {
 // Edit Budget
 export const editBudget = (id, budget, token) => async (dispatch) => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/budget/edit/${id}`, budget, {
+    const res = await axios.put(`http://localhost:5000/api/budget/updateBudget/${id}`, budget, {
       headers: {
         Authorization: `${token}`,
       },

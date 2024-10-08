@@ -11,6 +11,10 @@ import AddCategory from './pages/Category/AddCategory';
 import EditCategory from './pages/Category/EditCategory';
 import Budgets from './pages/Budget/Budget';
 import AddBudget from './pages/Budget/AddBudget';
+import EditBudget from './pages/Budget/EditBudget';
+import Expenses from './pages/Expenses/Expense';
+import AddExpense from './pages/Expenses/AddExpense';
+import EditExpense from './pages/Expenses/EditExpense';
 
 
 function App() {
@@ -29,7 +33,10 @@ function App() {
         <Route path="/categories/edit/:id" element={<EditCategory />} />
         <Route path="/budget" element={<Budgets />} />
         <Route path="/budget/add" element={<AddBudget />} />
-
+        <Route path="/budget/edit/:id" element={<EditBudget />} /> 
+        <Route path="/expenses" element={<Expenses />} /> 
+        <Route path="/expenses/add" element={<AddExpense />} />
+        <Route path="/expenses/edit/:id" element={<EditExpense />} />
       </Routes>
     </Router>
   );
