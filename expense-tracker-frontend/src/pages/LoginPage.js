@@ -14,16 +14,14 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/login`, {
         email,
         password,
       });
 
       const { token } = response.data;
-      // Store token in cookies
       Cookies.set('token', token);
 
-      // Redirect to dashboard after successful login
       navigate('/dashboard');
     } catch (error) {
       setError('Invalid email or password');

@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Expense extends Model {
     static associate(models) {
-      // Reference to Category model
+      
       Expense.belongsTo(models.Category, {
         foreignKey: 'category_id',
         as: 'category',
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Users',   // Refer to Users table
+        model: 'Users',   
         key: 'id'
       },
       onDelete: 'CASCADE'
@@ -47,8 +47,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Expense',
-    tableName: 'expenses',   // Table name is lowercase
-    underscored: true        // Use snake_case for columns
+    tableName: 'expenses',   
+    underscored: true        
   });
 
   return Expense;

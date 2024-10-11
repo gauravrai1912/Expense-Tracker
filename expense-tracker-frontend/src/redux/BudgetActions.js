@@ -6,30 +6,28 @@ export const EDIT_BUDGET = 'EDIT_BUDGET';
 export const DELETE_BUDGET = 'DELETE_BUDGET';
 export const BUDGET_ERROR = 'BUDGET_ERROR';
 
-// Get Budgets
 export const fetchBudgets = (token) => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:5000/api/budget/userBudgets', {
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/budget/userBudgets`, {
       headers: {
-        Authorization: `${token}`, // Add the token here
+        Authorization: `${token}`, 
       },
     });
     console.log(response.data);
     dispatch({ 
         type: GET_BUDGETS,
         payload: response.data 
-    }); // Changed to GET_BUDGETS
+    }); 
   } catch (error) {
     console.error("Error fetching budgets:", error);
     dispatch({ type: BUDGET_ERROR, payload: error.response.data.message });
   }
 };
 
-// Add Budget
 export const addBudget = (budget, token) => async (dispatch) => {
   try {
     console.log(budget);
-    const res = await axios.post('http://localhost:5000/api/budget/addBudget', budget, {
+    const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/budget/addBudget`, budget, {
       headers: {
         Authorization: `${token}`,
       },
@@ -47,10 +45,9 @@ export const addBudget = (budget, token) => async (dispatch) => {
   }
 };
 
-// Edit Budget
 export const editBudget = (id, budget, token) => async (dispatch) => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/budget/updateBudget/${id}`, budget, {
+    const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/budget/updateBudget/${id}`, budget, {
       headers: {
         Authorization: `${token}`,
       },
@@ -68,10 +65,9 @@ export const editBudget = (id, budget, token) => async (dispatch) => {
   }
 };
 
-// Delete Budget
 export const deleteBudget = (id, token) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:5000/api/budget/deleteBudget/${id}`, {
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/budget/deleteBudget/${id}`, {
       headers: {
         Authorization: `${token}`,
       },

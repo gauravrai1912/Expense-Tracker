@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addBudget } from '../../redux/BudgetActions';
-import { fetchCategoryIdByName } from '../../redux/CategoryActions';
+import { getCategories, fetchCategoryIdByName } from '../../redux/CategoryActions';
 import Snackbar from '@mui/material/Snackbar';
 import Cookies from 'js-cookie';
+import Navbar from '../../components/Navbar';
 
 const AddBudget = () => {
   const [categoryName, setCategoryName] = useState('');
@@ -14,10 +15,19 @@ const AddBudget = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  const token = Cookies.get('token'); // Get the token
+  const { categories } = useSelector((state) => state.category); // Access the categories from the store
+  
+  // Fetch categories when component mounts
+  useEffect(() => {
+    if (token) {
+      dispatch(getCategories(token)); // Fetch categories from the backend
+    }
+  }, [dispatch, token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = Cookies.get('token');
     const budgetPeriodRegex = /^\d{4}-\d{2}$/;
 
     if (!budgetPeriodRegex.test(budgetPeriod)) {
@@ -55,38 +65,47 @@ const AddBudget = () => {
   };
 
   return (
-    <div className="budget-container">
-      <h1>Add Budget</h1>
-      <form className="budget-form" onSubmit={handleSubmit}>
-        <label>Category Name:</label>
-        <input
-          type="text"
-          value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
-          required
+    <div className='app-container'>
+      <Navbar />
+      <div className="budget-container">
+        <h1>Add Budget</h1>
+        <form className="budget-form" onSubmit={handleSubmit}>
+          <label>Category Name:</label>
+          <select className='category-select'
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value)}
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <label>Monthly Budget:</label>
+          <input
+            type="number"
+            value={monthlyBudget}
+            onChange={(e) => setMonthlyBudget(e.target.value)}
+            required
+          />
+          <label>Budget Period (yyyy-mm):</label>
+          <input
+            type="text"
+            value={budgetPeriod}
+            onChange={(e) => setBudgetPeriod(e.target.value)}
+            required
+          />
+          <button className="form-submit-button" type="submit">Add Budget</button>
+        </form>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+          message={message}
         />
-        <label>Monthly Budget:</label>
-        <input
-          type="number"
-          value={monthlyBudget}
-          onChange={(e) => setMonthlyBudget(e.target.value)}
-          required
-        />
-        <label>Budget Period (yyyy-mm):</label>
-        <input
-          type="text"
-          value={budgetPeriod}
-          onChange={(e) => setBudgetPeriod(e.target.value)}
-          required
-        />
-        <button className="form-submit-button" type="submit">Add Budget</button>
-      </form>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message={message}
-      />
+      </div>
     </div>
   );
 };

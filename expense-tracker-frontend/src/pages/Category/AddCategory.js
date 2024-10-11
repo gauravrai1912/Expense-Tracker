@@ -37,6 +37,7 @@ const AddCategory = () => {
   };
 
   return (
+    <div className="app-container">
     <div className="add-category-container">
       <h1>Add Category</h1>
       <form onSubmit={handleAddCategory}>
@@ -60,6 +61,7 @@ const AddCategory = () => {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+    </div>
     </div>
   );
 };

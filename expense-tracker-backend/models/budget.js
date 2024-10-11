@@ -4,11 +4,11 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Budget extends Model {
     static associate(models) {
-      // Define associations
+      
       Budget.belongsTo(models.User, { foreignKey: 'user_id' });
       Budget.belongsTo(models.Category, {
         foreignKey: 'category_id',
-        as: 'category', // This alias must match what you use in your API
+        as: 'category', 
       });
     }
   }
@@ -36,10 +36,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     budget_period: {
-      type: DataTypes.STRING, // Use STRING to store 'YYYY-MM'
+      type: DataTypes.STRING, 
       allowNull: false,
       validate: {
-        is: /^\d{4}-(0[1-9]|1[0-2])$/ // Validate format as 'YYYY-MM'
+        is: /^\d{4}-(0[1-9]|1[0-2])$/ 
       }
     }
   }, {

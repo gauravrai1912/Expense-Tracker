@@ -18,26 +18,24 @@ const ForgotPasswordPage = () => {
     e.preventDefault();
     setError('');
     setMessage('');
-    setLoading(true); // Start loading spinner
+    setLoading(true); 
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/request-password-reset', { email });
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/request-password-reset`, { email });
       setMessage(response.data.message);
-      setOpenSnackbar(true); // Open success snackbar
+      setOpenSnackbar(true);
 
-      // Redirect to verify OTP page after 2 seconds
       setTimeout(() => {
         navigate('/verify-otp', { state: { email } });
       }, 500);
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');
-      setOpenSnackbar(true); // Open error snackbar
+      setOpenSnackbar(true); 
     } finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false); 
     }
   };
 
-  // Handle closing the Snackbar
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
@@ -60,7 +58,6 @@ const ForgotPasswordPage = () => {
         </form>
       </div>
 
-      {/* Snackbar for Success and Error */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}

@@ -9,7 +9,7 @@ module.exports = {
         model: 'Users',
         key: 'id',
       },
-      onDelete: 'CASCADE', // Optional: Set cascade delete if needed
+      onDelete: 'CASCADE', 
     });
   },
 

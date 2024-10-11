@@ -1,4 +1,4 @@
-/* Profile.css */
+
 .relative {
   position: relative;
 }
@@ -12,19 +12,19 @@
 }
 
 .text-teal-600 {
-  color: #20c997; /* Adjust this to your teal color */
+  color: #20c997; 
 }
 
 .hover\:bg-teal-100:hover {
-  background-color: #e6fcf9; /* Light teal color on hover */
+  background-color: #e6fcf9; 
 }
 
 .border-b {
-  border-bottom: 1px solid #e2e8f0; /* Light gray border for separation */
+  border-bottom: 1px solid #e2e8f0; 
 }
 
 .rounded-md {
-  border-radius: 0.375rem; /* Standard border radius */
+  border-radius: 0.375rem; 
 }
 
 .shadow-lg {

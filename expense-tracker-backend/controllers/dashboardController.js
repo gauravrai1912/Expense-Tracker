@@ -1,52 +1,110 @@
-const { Expense, Budget, Category, sequelize } = require('../models');
-const { Op } = require('sequelize');
+const { Expense, Budget, Category } = require('../models');
+const { Op, Sequelize } = require('sequelize');
 
-// Get total expenses for the current month
-exports.getTotalExpenses = async (req, res) => {
-  const  user_id  = req.user.id;  // Correctly using user_id from the token
+
+exports.getDashboardOverview = async (req, res) => {
+  const userId = req.user.id;
+  const { month } = req.query; 
 
   try {
-    const currentMonth = new Date().getMonth() + 1;
-    const year = new Date().getFullYear();
+   
+    const startDate = new Date(`${month}-01T00:00:00Z`); 
+    const endDate = new Date(new Date(startDate).setMonth(startDate.getMonth() + 1)); 
 
-    const totalExpenses = await Expense.sum('amount', {
+
+    let totalExpenses = await Expense.sum('amount', {
       where: {
-        user_id,
+        user_id: userId,
         date: {
-          [Op.gte]: new Date(year, currentMonth - 1, 1),    // First day of the month
-          [Op.lt]: new Date(year, currentMonth, 1),         // First day of next month
+          [Op.between]: [startDate, endDate],  
         },
       },
     });
 
-    res.status(200).json({ totalExpenses });
+    totalExpenses = totalExpenses || 0;
+
+    
+    const budgets = await Budget.findAll({
+      where: { user_id : userId, budget_period: month },
+      include: {
+        model: Category,
+        as: 'category',
+        attributes: ['name'], 
+      },
+    });
+
+    const budgetVsSpending = await Promise.all(budgets.map(async (budget) => {
+      const spent = await Expense.sum('amount', {
+        where: {
+          user_id: userId,
+          category_id: budget.category_id,
+          date: {
+            [Op.gte]: startDate, 
+            [Op.lt]: endDate,   
+          },
+        },
+      });
+      return {
+        category_id: budget.category_id,
+        categoryName: budget.category ? budget.category.name : 'Unknown',
+        budget: budget.monthly_budget,
+        spent: spent || 0,
+        remaining: budget.monthly_budget - (spent || 0),
+      };
+    }));
+
+    
+    const spendingTrends = await Expense.findAll({
+      attributes: [
+        [Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('date')), 'month'],
+        [Sequelize.fn('SUM', Sequelize.col('amount')), 'total_spent'],
+      ],
+      where: { user_id: userId },
+      group: [Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('date'))],
+      order: [[Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('date')), 'ASC']],
+    });
+
+
+    const formattedSpendingTrends = spendingTrends.map(trend => ({
+      month: trend.dataValues.month.toISOString().slice(0, 7), 
+      total_spent: parseFloat(trend.dataValues.total_spent),
+    }));
+    
+    
+    res.status(200).json({
+      totalExpenses,
+      budgetVsSpending,
+      spendingTrends: formattedSpendingTrends, 
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
     console.log(error);
+    res.status(500).json({ error: 'Failed to fetch dashboard data' });
   }
 };
 
-// Get overspending categories
-exports.getOverspendingCategories = async (req, res) => {
-  const user_id = req.user.id;  // Correctly using user_id from the token
+// In your controller file
+exports.getSpendingTrends = async (req, res) => {
+  const userId = req.user.id; 
 
   try {
-    const overspendingCategories = await sequelize.query(`
-      SELECT c.name AS category, SUM(e.amount) AS total_spent, b.monthly_budget
-      FROM expenses e
-      INNER JOIN "Budgets" b ON e.category_id = b.category_id
-      INNER JOIN "Categories" c ON c.id = e.category_id
-      WHERE e.user_id = :user_id
-      AND EXTRACT(MONTH FROM e.date) = EXTRACT(MONTH FROM CURRENT_DATE)
-      GROUP BY c.name, b.monthly_budget
-      HAVING SUM(e.amount) > b.monthly_budget
-    `, {
-      replacements: { user_id },
-      type: sequelize.QueryTypes.SELECT,
+    const spendingTrends = await Expense.findAll({
+      attributes: [
+        [Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('date')), 'month'],
+        [Sequelize.fn('SUM', Sequelize.col('amount')), 'total_spent'],
+      ],
+      where: { user_id: userId },
+      group: [Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('date'))],
+      order: [[Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('date')), 'ASC']],
     });
 
-    res.status(200).json(overspendingCategories);
+    const formattedSpendingTrends = spendingTrends.map(trend => ({
+      month: trend.dataValues.month.toISOString().slice(0, 7), 
+      total_spent: parseFloat(trend.dataValues.total_spent),
+    }));
+    
+    res.status(200).json(formattedSpendingTrends);
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.log(error);
+    res.status(500).json({ error: 'Failed to fetch spending trends' });
   }
 };

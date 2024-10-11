@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    user_id: { // Ensure this matches the column name in the database
+    user_id: { 
       type: DataTypes.INTEGER,
       allowNull: false,
     },

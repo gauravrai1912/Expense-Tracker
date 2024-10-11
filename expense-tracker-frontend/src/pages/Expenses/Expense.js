@@ -6,27 +6,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getExpenses, deleteExpense } from '../../redux/ExpenseActions';
 import Cookies from 'js-cookie';
 import '../../styles/Expense.css';
-
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const Expenses = () => {
   const dispatch = useDispatch();
   const token = Cookies.get('token');
 
-  // Access expenses and error from the Redux store
   const { expenses, error } = useSelector((state) => state.expense);
 
   useEffect(() => {
     if (token) {
-      dispatch(getExpenses(token)); // Dispatch the action to fetch expenses
+      dispatch(getExpenses(token)); // Fetch expenses on page load
     }
-  }, [dispatch, token]);
+  }, [dispatch, token, expenses]); // Add expenses as a dependency to listen for updates
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this expense?');
-    if (confirmDelete) {
-      if (token) {
-        dispatch(deleteExpense(id, token)); // Dispatch the delete action
-      }
+    if (confirmDelete && token) {
+      dispatch(deleteExpense(id, token));
     }
   };
 
@@ -37,14 +35,16 @@ const Expenses = () => {
       <div className="expenses-container">
         <h1>Expenses</h1>
         <Link to="/expenses/add" className="add-expense-button">Add Expense</Link>
-        {error && <p className="error-message">{error}</p>}
+        {error && <Snackbar open autoHideDuration={6000}>
+          <Alert severity="error">{error}</Alert>
+        </Snackbar>}
         <table className="expenses-table">
           <thead>
             <tr>
               <th>Description</th>
               <th>Amount</th>
               <th>Date</th>
-              <th>Category</th> {/* Display Category Name */}
+              <th>Category</th>
               <th>Receipt URL</th>
               <th>Actions</th>
             </tr>
@@ -55,7 +55,7 @@ const Expenses = () => {
                 <td>{expense.description}</td>
                 <td>{expense.amount}</td>
                 <td>{new Date(expense.date).toLocaleDateString()}</td>
-                <td>{expense.category ? expense.category.name : 'Unknown Category'}</td> {/* Display Category Name */}
+                <td>{expense.category ? expense.category.name : 'Unknown Category'}</td>
                 <td>
                   <a href={expense.receipt_url} target="_blank" rel="noopener noreferrer">View Receipt</a>
                 </td>

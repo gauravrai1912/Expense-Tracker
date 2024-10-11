@@ -13,14 +13,17 @@ const SignupPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/signup', {
+      console.log(username, email, password);
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/signup`, {
         username,
         email,
         password,
       });
 
+      console.log(response);
+
     
-      if (response.status === 200 ){
+      if (response.status === 201 ){
         navigate('/login');
       } else {
         setError('Registration failed. Please try again.');

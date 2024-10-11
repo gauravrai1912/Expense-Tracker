@@ -13,11 +13,9 @@ const VerifyOtpPage = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Retrieve the email from the location state (passed from ForgotPasswordPage)
   const location = useLocation();
   const { email } = location.state || {};
 
-  // Check if email is defined
   if (!email) {
     return <div>Error: Email not found. Please go back and try again.</div>;
   }
@@ -30,12 +28,12 @@ const VerifyOtpPage = () => {
 
     try {
       console.log(email);
-      const response = await axios.post('http://localhost:5000/api/users/verify-otp', { email, otp });
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/verify-otp`, { email, otp });
       setMessage(response.data.message);
       setLoading(false);
       setSnackbarOpen(true);
       setTimeout(() => {
-        navigate('/reset-password', { state: { email } }); // Pass email to ResetPasswordPage
+        navigate('/reset-password', { state: { email } }); 
       }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');
@@ -68,7 +66,6 @@ const VerifyOtpPage = () => {
         </form>
       </div>
 
-      {/* Snackbar for success/error messages */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}

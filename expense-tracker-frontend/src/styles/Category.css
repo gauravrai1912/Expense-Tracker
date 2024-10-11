@@ -2,7 +2,7 @@
   padding: 20px;
  width: 800px;
   margin: auto;
-  background-color: #f8f9fa; /* Light background for contrast */
+  background-color: #f8f9fa; 
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -10,14 +10,14 @@
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #20c997; /* Teal color for the heading */
+  color: #20c997; 
 }
 
 .add-category-button {
   display: inline-block;
   margin: 0 0 20px;
   padding: 10px 20px;
-  background-color: #20c997; /* Teal background */
+  background-color: #20c997; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -27,7 +27,7 @@ h1 {
 }
 
 .add-category-button:hover {
-  background-color: #17a2b8; /* Darker teal on hover */
+  background-color: #17a2b8; 
 }
 
 .categories-table {
@@ -42,53 +42,53 @@ h1 {
 }
 
 .categories-table th {
-  background-color: #343a40; /* Dark background for header */
+  background-color: #343a40; 
   color: white;
 }
 
 .categories-table tr:hover {
-  background-color: #f1f1f1; /* Light background on hover */
+  background-color: #f1f1f1; 
 }
 
 .edit-button,
 .delete-button {
   
-  padding: 8px 12px; /* Same padding for both buttons */
+  padding: 8px 12px; 
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
-  font-size: 14px; /* Set a consistent font size */
-  width: 100px; /* Set a minimum width for consistency */
-  text-align: center; /* Center text in buttons */
+  font-size: 14px; 
+  width: 100px; 
+  text-align: center; 
 }
 
 .edit-button {
-  background-color: #007bff; /* Blue for edit button */
-  margin-right: 5px; /* Space between buttons */
+  background-color: #007bff; 
+  margin-right: 5px; 
 }
 
 .edit-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
 
 .delete-button {
-  background-color: #dc3545; /* Red for delete button */
+  background-color: #dc3545; 
 }
 
 .delete-button:hover {
-  background-color: #c82333; /* Darker red on hover */
+  background-color: #c82333; 
 }
 
 
 .button-container {
   margin-left: 180px;
-  display: flex; /* Use flexbox for side-by-side layout */
-  justify-content: flex-start; /* Align buttons to the left */
+  display: flex; 
+  justify-content: flex-start; 
 }
 
 .categories-table td {
-  text-align: center; /* Center the buttons in the table */
+  text-align: center; 
 }
 
 
@@ -100,15 +100,15 @@ h1 {
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the container takes up full height of the viewport */
+  min-height: 100vh; 
 }
 
 .content {
-  flex: 1; /* Allow content area to grow and fill the space */
+  flex: 1; 
 }
 
 footer {
-  margin-top: auto; /* Push the footer to the bottom */
+  margin-top: auto; 
 }
 .category-form {
   display: flex;
@@ -175,13 +175,13 @@ footer {
   padding: 10px;
   margin-bottom: 10px;
   width: 300px;
-  border: 1px solid #20c997; /* Teal theme */
+  border: 1px solid #20c997; 
   border-radius: 4px;
 }
 
 .edit-category-container button {
   padding: 10px 20px;
-  background-color: #20c997; /* Teal theme */
+  background-color: #20c997; 
   color: white;
   border: none;
   border-radius: 4px;
@@ -189,5 +189,5 @@ footer {
 }
 
 .edit-category-container button:hover {
-  background-color: #1abf88; /* Darker teal for hover effect */
+  background-color: #1abf88; 
 }

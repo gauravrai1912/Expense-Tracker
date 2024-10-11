@@ -13,57 +13,57 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-    text-align: center; /* Center the text */
+    text-align: center; 
   }
   
   h2 {
-    margin-bottom: 20px; /* Space between heading and form */
-    color: #20c997; /* Teal color for the heading */
+    margin-bottom: 20px; 
+    color: #20c997; 
   }
   
   input {
     width: 100%;
-    padding: 12px; /* Increased padding for a better feel */
-    margin: 10px 0; /* Adjusted margin for more spacing */
+    padding: 12px; 
+    margin: 10px 0; 
     border-radius: 6px;
     border: 1px solid #ccc;
-    font-size: 16px; /* Increase font size */
+    font-size: 16px; 
   }
   
   button {
     width: 100%;
-    padding: 12px; /* Increased button padding */
-    background-color: #20c997; /* Teal color */
+    padding: 12px; 
+    background-color: #20c997; 
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 16px; /* Increase font size */
-    transition: background-color 0.3s; /* Smooth transition */
+    font-size: 16px; 
+    transition: background-color 0.3s; 
   }
   
   button:hover {
-    background-color: #17a2b8; /* Darker shade of teal */
+    background-color: #17a2b8; 
   }
   
   .error {
     color: red;
-    margin: 10px 0; /* Space above error message */
+    margin: 10px 0; 
   }
   
   .additional-options {
     display: flex;
-    justify-content: center; /* Center the links */
-    margin-top: 15px; /* Space between form and links */
-    font-size: 14px; /* Adjust font size */
+    justify-content: center; 
+    margin-top: 15px; 
+    font-size: 14px; 
   }
   
   .link {
-    color: #20c997; /* Teal color for links */
+    color: #20c997; 
     text-decoration: none;
-    margin-left: 5px; /* Space between text and link */
+    margin-left: 5px; 
   }
   
   .link:hover {
-    text-decoration: underline; /* Underline on hover */
+    text-decoration: underline; 
   }

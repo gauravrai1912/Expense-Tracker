@@ -10,7 +10,7 @@ export const EXPENSE_ERROR = 'EXPENSE_ERROR';
 // Get Expenses
 export const getExpenses = (token) => async (dispatch) => {
   try {
-    const res = await axios.get('http://localhost:5000/api/expense/getExpenses', {
+    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/expense/getExpenses`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -32,7 +32,7 @@ export const getExpenses = (token) => async (dispatch) => {
 export const addExpense = (expense, token) => async (dispatch) => {
   try {
 
-    const res = await axios.post('http://localhost:5000/api/expense/addExpense', expense, {
+    const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/expense/addExpense`, expense, {
       headers: {
         Authorization: `${token}`,
       },
@@ -53,7 +53,7 @@ export const addExpense = (expense, token) => async (dispatch) => {
 // Edit Expense
 export const editExpense = (id, expense, token) => async (dispatch) => {
   try {
-    const res = await axios.put(`http://localhost:5000/api/expense/updateExpenses/${id}`, expense, {
+    const res = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/expense/updateExpenses/${id}`, expense, {
       headers: {
         Authorization: `${token}`,
       },
@@ -74,7 +74,7 @@ export const editExpense = (id, expense, token) => async (dispatch) => {
 // Delete Expense
 export const deleteExpense = (id, token) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:5000/api/expense/deleteExpenses/${id}`, {
+    await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/expense/deleteExpenses/${id}`, {
       headers: {
         Authorization: `${token}`,
       },

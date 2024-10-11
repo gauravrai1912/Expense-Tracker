@@ -5,7 +5,6 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class OTP extends Model {
     static associate(models) {
-      // Associations if needed
     }
   }
 

@@ -31,12 +31,12 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/reset-password', { email, newPassword });
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/reset-password`, { email, newPassword });
       setMessage(response.data.message);
       setLoading(false);
       setSnackbarOpen(true);
       setTimeout(() => {
-        navigate('/login'); // Redirect to login page after successful reset
+        navigate('/login'); 
       }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');
@@ -74,7 +74,6 @@ const ResetPasswordPage = () => {
         </form>
       </div>
 
-      {/* Snackbar for success/error messages */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}
